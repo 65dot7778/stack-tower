@@ -1,5 +1,5 @@
 window.STACK_TOWER_CONFIG = {
-  SUPABASE_URL: "https://mxhyvhgmjbdrdpoziikf.supabase.co/rest/v1/",
+  SUPABASE_URL: "https://mxhyvhgmjbdrdpoziikf.supabase.co",
   SUPABASE_ANON_KEY: "sb_publishable_NXvIIwof-hDkDyRv1KtBDw_poptAkfs"
 };
 (() => {
