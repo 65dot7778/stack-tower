@@ -4,15 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080809">
+  <meta name="theme-color" content="#060608">
   <title>FAULT//01 — Classified Precision Test</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=4">
 </head>
 <body>
   <div class="site-shell">
     <header class="topbar">
       <a class="brand" href="index.html">
-        <span class="brand-mark">F</span> FAULT//01
+        <span class="brand-mark">⌖</span> FAULT//01
       </a>
       <span class="topbar-tag">RESTRICTED // SYSTEM 01</span>
     </header>
@@ -20,49 +20,28 @@
     <main>
       <!-- 홈 화면 -->
       <section id="home-view" class="view active">
-        <div class="hero">
-          <div class="hero-copy">
-            <div class="file-stamp">FILE ID : F-001 <span>● ACTIVE</span></div>
-            <p class="eyebrow">CLASSIFIED / PRECISION PROTOCOL</p>
-            <h1>EVERY MOVE<br>LEAVES A <span>TRACE.</span></h1>
-            <p class="hero-description">
-              기록은 남는다. 오차는 허용되지 않는다. 블록을 정확히 맞추고 최고 기록을 갱신하세요.
-            </p>
-
-            <div class="hero-actions">
-              <button class="button button-primary" id="start-button">
-                INITIATE <span>↗</span>
-              </button>
-              <button class="button button-ghost" data-view="tutorial-view">
-                게임 방법
-              </button>
+        <div class="horror-home">
+          <div class="scene-backdrop" aria-hidden="true"></div>
+          <div class="scene-noise" aria-hidden="true"></div>
+          <div class="home-utility"><span><b class="rec-dot"></b> CONTAINMENT NETWORK / CAM 01</span><span>EXPERIMENT LOG — 001 <em>● RESTRICTED</em></span></div>
+          <div class="home-stage">
+            <aside class="evidence-rail" aria-hidden="true">
+              <div class="cam-unit"><div class="cam-label">CAM 01 <span>● REC</span></div><div class="cam-screen cam-one"><span>SECTOR_07</span></div><div class="cam-time">NO SIGNAL LOSS // 00:01:37</div></div>
+              <div class="cam-unit cam-unit-small"><div class="cam-label">CAM 02 <span>● REC</span></div><div class="cam-screen cam-two"><span>OBSERVATION</span></div></div>
+              <div class="classified-stamp">CLASSIFIED <small>F / 001</small></div>
+            </aside>
+            <div class="home-center">
+              <p class="case-overline">[ EXPERIMENT LOG : 01 ] <span>/// PRECISION STACKING PROTOCOL</span></p>
+              <h1 class="fault-title">FAULT<span>//01</span></h1>
+              <p class="fault-subtitle">[ PRECISION STACKING PROTOCOL ]</p>
+              <p class="hero-description">타이밍을 맞춰 블록을 쌓고,<br>전교생 랭킹에 이름을 올려 보세요.</p>
+              <div class="hero-actions"><button class="button button-primary" id="start-button"><span>▶</span> INITIATE</button><button class="button button-ghost" data-view="tutorial-view">▤ &nbsp; PROTOCOL</button></div>
+              <div class="hero-stats"><div><span>PERSONAL BEST</span><strong id="home-best">—</strong></div><div><span>GLOBAL TOP</span><strong id="home-leader">—</strong></div></div>
+              <div class="home-warning"><span>01 / EXPERIMENT ACTIVE</span><span>DO NOT INTERRUPT</span></div>
             </div>
-
-            <div class="hero-stats">
-              <div>
-                <strong id="home-best">—</strong>
-                <span>내 최고 기록</span>
-              </div>
-              <div>
-                <strong id="home-leader">—</strong>
-                <span>전체 최고 점수</span>
-              </div>
-            </div>
+            <aside class="subject-rail" aria-hidden="true"><div class="subject-sheet"><div class="sheet-clip"></div><span>SUBJECT_01</span><div class="subject-photo"></div><small>ACCESS LEVEL / 01<br>STATUS: ACTIVE<br>FILE: F-001</small><div class="barcode"></div></div><div class="tank"><span class="tank-top">CONTAINMENT / 01</span><div class="tank-silhouette"></div><span class="tank-bottom">● SYSTEM ONLINE</span></div></aside>
           </div>
-
-          <div class="tower-art" aria-label="감시 기록 필름 블록 일러스트">
-            <span class="art-corner corner-tl"></span><span class="art-corner corner-tr"></span><span class="art-corner corner-bl"></span><span class="art-corner corner-br"></span>
-            <span class="art-index">FIG. 01 / MODULE ALIGNMENT</span>
-            <div class="art-glow"></div>
-            <div class="art-label">CASE<br><b>NO. 01</b></div>
-            <div class="art-block block-1"></div>
-            <div class="art-block block-2"></div>
-            <div class="art-block block-3"></div>
-            <div class="art-block block-4"></div>
-            <div class="art-block block-5"></div>
-            <div class="art-block block-6"></div>
-            <div class="art-base"></div>
-          </div>
+          <div class="scene-bottom"><span>▥ &nbsp; SECURE CHANNEL ESTABLISHED</span><span>FAULT PROTOCOL / VERSION 01.0</span></div>
         </div>
 
         <section class="home-lower">
@@ -430,6 +409,6 @@
 
   <!-- 게임 -->
   <script src="js/app.js"></script>
-  <script src="js/game.js"></script>
+  <script src="js/game.js?v=4"></script>
 </body>
 </html>
