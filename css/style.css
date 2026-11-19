@@ -152,3 +152,22 @@ body{background:radial-gradient(ellipse at 20% 0%,#310a11 0%,#090608 40%,#030304
 @media(max-width:1150px){.topbar-tag{display:none}.home-stage{grid-template-columns:140px minmax(320px,1fr) 135px;padding:25px 10px}.fault-title{font-size:clamp(65px,8vw,104px)}.subject-sheet{width:128px}.tank{width:115px}.evidence-rail{max-width:145px}}
 @media(max-width:750px){.site-shell{padding:0 10px}.topbar{height:58px}.brand{font-size:19px}.site-nav{gap:10px}.site-nav button{font-size:10px;padding:14px 2px}.horror-home{min-height:660px}.scene-backdrop{background:linear-gradient(0deg,#030203d9,#0503057c 60%,#04030490),url('../assets/horror-lab.webp') 48% center/auto 100%}.home-stage{grid-template-columns:1fr;padding:115px 14px 45px;min-height:570px}.evidence-rail,.subject-rail{display:none}.home-center{background:#050305bb;padding:30px 8px;border:1px solid #9d2b354a}.fault-title{font-size:clamp(62px,14vw,98px);letter-spacing:-3px}.case-overline{font-size:9px;letter-spacing:1px}.home-center .button{min-width:0;flex:1;font-size:17px}.home-utility span:last-child{display:none}.horror-scene-label{top:62px}.game-layout{grid-template-columns:1fr}.canvas-wrap{height:460px}.side-panel{grid-template-columns:1fr 1fr}.result-panel{grid-template-columns:1fr}.home-lower{grid-template-columns:1fr}}
 @media(max-width:390px){.fault-title{font-size:57px}.site-nav{gap:6px}.site-nav button{font-size:9px}.home-center .button{font-size:14px}.home-center .hero-stats div{padding:10px 8px}}
+
+/* FAULT//01 title only — corroded metal surface, original sizing/layout retained */
+#home-view .fault-title {
+  color:#ddd5d3;
+  background-image:linear-gradient(180deg,#ffffff35 0%,transparent 35%,#170c0e45 100%),url('../assets/rust-silver.webp');
+  background-size:100% 100%, 520px 190px;
+  background-position:center;
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(3px 4px 1px #21090e) drop-shadow(0 0 9px #000);
+}
+#home-view .fault-title span {
+  background-image:linear-gradient(180deg,#f94d5140,transparent 45%,#20050b65),url('../assets/rust-red.webp');
+  background-size:100% 100%,340px 160px;
+  background-position:center;
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 0 5px #bd14265e);
+}
