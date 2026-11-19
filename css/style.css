@@ -171,3 +171,12 @@ body{background:radial-gradient(ellipse at 20% 0%,#310a11 0%,#090608 40%,#030304
   -webkit-text-fill-color:transparent;
   filter:drop-shadow(0 0 5px #bd14265e);
 }
+#home-view .fault-title {
+  background-image:
+    linear-gradient(
+      90deg,
+      #e0d9d5b3,
+      #e0d9d5b3
+    ),
+    url('../assets/rust-silver.webp');
+}
