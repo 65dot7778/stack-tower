@@ -53,29 +53,63 @@
      const visible=blocks.slice(-18);
      visible.forEach(b=>drawBlock(b.x,b.y,b.w,blockH,false));
      if(moving)drawBlock(moving.x,moving.y,moving.w,moving.h,true);
-     ctx.fillStyle="#b9aeb0";ctx.font="13px monospace";ctx.textAlign="left";ctx.fillText("FAULT//01   /   FLOOR "+String(score).padStart(3,"0"),24,30);
+     ctx.fillStyle="#b9aeb0";ctx.font="13px monospace";ctx.textAlign="left";ctx.fillText("FAULT//01  /  CAM 01  /  FLOOR "+String(score).padStart(3,"0"),24,30);
      ctx.fillStyle="#d33943";ctx.fillRect(W-84,20,6,6);ctx.fillStyle="#b9aeb0";ctx.textAlign="right";ctx.fillText(state==="over"?"CASE CLOSED":"REC",W-24,30);
    }
-   function armorPath(x,y,w,h){
-     const cut=Math.min(9,w*.13,h*.32);
-     ctx.beginPath();ctx.moveTo(x+cut,y);ctx.lineTo(x+w-cut,y);ctx.lineTo(x+w,y+cut);ctx.lineTo(x+w,y+h-cut);ctx.lineTo(x+w-cut,y+h);ctx.lineTo(x+cut,y+h);ctx.lineTo(x,y+h-cut);ctx.lineTo(x,y+cut);ctx.closePath();
+   // Every layer is the same damaged surveillance-film design.
+   // The clipped artwork scales safely when the stack gets narrower.
+   function filmPath(x,y,w,h){
+     const cut=Math.min(5,w*.12);
+     ctx.beginPath();ctx.moveTo(x+cut,y);ctx.lineTo(x+w-cut,y);
+     ctx.lineTo(x+w,y+3);ctx.lineTo(x+w,y+h-3);
+     ctx.lineTo(x+w-cut,y+h);ctx.lineTo(x+cut,y+h);
+     ctx.lineTo(x,y+h-3);ctx.lineTo(x,y+3);ctx.closePath();
    }
    function drawBlock(x,y,w,h,isMoving){
      if(w<=0)return;
-     ctx.save();armorPath(x,y,w,h);ctx.clip();
-     const metal=ctx.createLinearGradient(x,y,x,y+h);metal.addColorStop(0,isMoving?"#575052":"#474346");metal.addColorStop(.18,"#2b292c");metal.addColorStop(.75,"#161517");metal.addColorStop(1,"#09090a");ctx.fillStyle=metal;ctx.fillRect(x,y,w,h);
-     ctx.fillStyle="#b8a6a733";ctx.fillRect(x+4,y+2,Math.max(0,w-8),2);
-     ctx.fillStyle="#0b0a0c";ctx.fillRect(x,y+h-4,w,4);
-     // diagonal armored seam
-     if(w>30){ctx.strokeStyle="#67606588";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x+w*.6,y+2);ctx.lineTo(x+w*.6-12,y+h-3);ctx.stroke();}
-     // red hazard chevrons and signal bar; clipped for narrow trimmed blocks
-     if(w>42){
-       const sw=Math.min(58,w*.38);ctx.save();ctx.beginPath();ctx.rect(x+12,y+7,sw,Math.max(2,h-14));ctx.clip();ctx.fillStyle="#a92732";ctx.fillRect(x+12,y+7,sw,h-14);ctx.strokeStyle="#150d0f";ctx.lineWidth=5;
-       for(let i=-h;i<sw+h;i+=13){ctx.beginPath();ctx.moveTo(x+12+i,y+h);ctx.lineTo(x+12+i+h*.65,y);ctx.stroke();}ctx.restore();
+     ctx.save();
+     ctx.shadowColor=isMoving?'#ec2539':'#8e1724';ctx.shadowBlur=isMoving?18:7;
+     filmPath(x,y,w,h);ctx.fillStyle='#0b080a';ctx.fill();ctx.shadowBlur=0;
+     filmPath(x,y,w,h);ctx.clip();
+     const grad=ctx.createLinearGradient(x,y,x,y+h);
+     grad.addColorStop(0,'#2c2025');grad.addColorStop(.19,'#100d10');grad.addColorStop(.51,'#3c292d');grad.addColorStop(.83,'#10090d');grad.addColorStop(1,'#090609');
+     ctx.fillStyle=grad;ctx.fillRect(x,y,w,h);
+     // Old analog film frames, repeated rather than stretched.
+     ctx.strokeStyle='#9b7e8066';ctx.lineWidth=.7;
+     for(let i=0;i<w;i+=31){ctx.strokeRect(x+i+2,y+5,28,h-10);}
+     // Film perforations along both edges.
+     ctx.fillStyle='#040305';
+     for(let i=7;i<w-2;i+=11){ctx.fillRect(x+i,y+1,5,3);ctx.fillRect(x+i,y+h-4,5,3);}
+     ctx.fillStyle='#bd969655';
+     for(let i=7;i<w-2;i+=11){ctx.fillRect(x+i,y+1,5,.6);}
+     // A repeating ghostly surveillance shadow in each frame.
+     for(let i=0;i<w;i+=31){
+       const cx=x+i+17,cy=y+h*.51;
+       ctx.fillStyle='#a59c9c24';ctx.beginPath();ctx.ellipse(cx,cy-2,3,4,0,0,Math.PI*2);ctx.fill();
+       ctx.beginPath();ctx.ellipse(cx,cy+5,6,5,0,Math.PI,Math.PI*2);ctx.fill();
      }
-     if(w>24){const ledW=Math.min(36,w*.22);ctx.fillStyle=isMoving?"#f04955":"#c62c38";ctx.shadowColor="#ed2e3d";ctx.shadowBlur=isMoving?17:8;ctx.fillRect(x+w-ledW-9,y+h-7,ledW,3);ctx.shadowBlur=0;}
-     if(w>92){ctx.fillStyle="#777073";ctx.fillRect(x+w-10,y+5,2,2);ctx.fillRect(x+6,y+h-7,2,2);}
-     ctx.restore();ctx.save();armorPath(x,y,w,h);ctx.strokeStyle=isMoving?"#d14b54":"#6d6467";ctx.lineWidth=1.2;ctx.stroke();ctx.restore();
+     // Fractured-glass scratches, repeatable across cropped block widths.
+     ctx.strokeStyle='#d4b4b477';ctx.lineWidth=.7;
+     for(let i=23;i<w;i+=66){
+       const sx=x+i,sy=y+Math.round(h*.47);
+       ctx.beginPath();ctx.moveTo(sx-13,y+2);ctx.lineTo(sx,sy);ctx.lineTo(sx+12,y+h-2);ctx.stroke();
+       ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(sx+14,y+3);ctx.moveTo(sx,sy);ctx.lineTo(sx-9,y+h-3);ctx.stroke();
+     }
+     // Dark crimson stains; no random flicker, so the texture stays stable.
+     ctx.fillStyle='#84162180';
+     for(let i=10;i<w;i+=53){
+       ctx.beginPath();ctx.ellipse(x+i,y+8,8,3.1,-.3,0,Math.PI*2);ctx.fill();
+       ctx.fillRect(x+i+2,y+9,1.8,Math.min(7,h-11));
+     }
+     // REC signal and light strip.
+     if(w>38){
+       ctx.fillStyle='#ed3545';ctx.shadowColor='#e51e35';ctx.shadowBlur=isMoving?12:5;
+       ctx.fillRect(x+w-25,y+h-7,17,2);ctx.shadowBlur=0;
+       ctx.beginPath();ctx.arc(x+12,y+h*.5,2,0,Math.PI*2);ctx.fill();
+     }
+     if(w>85){ctx.font='7px monospace';ctx.fillStyle='#e1aeb0';ctx.textAlign='left';ctx.fillText('REC 01',x+19,y+Math.min(14,h-7));}
+     ctx.restore();
+     ctx.save();filmPath(x,y,w,h);ctx.strokeStyle=isMoving?'#ed4756':'#806266';ctx.lineWidth=1.1;ctx.stroke();ctx.restore();
    }
   function loop(){
     if(state!=="playing")return;
