@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -10,26 +11,44 @@
 <body>
   <div class="site-shell">
     <header class="topbar">
-      <a class="brand" href="index.html"><span class="brand-mark">S</span> STACK TOWER</a>
+      <a class="brand" href="index.html">
+        <span class="brand-mark">S</span> STACK TOWER
+      </a>
       <span class="topbar-tag">ARCADE CHALLENGE</span>
     </header>
 
     <main>
+      <!-- 홈 화면 -->
       <section id="home-view" class="view active">
         <div class="hero">
           <div class="hero-copy">
             <p class="eyebrow">ONE CLICK. ONE MORE BLOCK.</p>
             <h1>HOW HIGH<br>CAN YOU <span>GO?</span></h1>
-            <p class="hero-description">타이밍을 맞춰 블록을 쌓고, 전교생 랭킹에 이름을 올려 보세요.</p>
+            <p class="hero-description">
+              타이밍을 맞춰 블록을 쌓고, 전교생 랭킹에 이름을 올려 보세요.
+            </p>
+
             <div class="hero-actions">
-              <button class="button button-primary" id="start-button">게임 시작 <span>↗</span></button>
-              <button class="button button-ghost" data-view="tutorial-view">게임 방법</button>
+              <button class="button button-primary" id="start-button">
+                게임 시작 <span>↗</span>
+              </button>
+              <button class="button button-ghost" data-view="tutorial-view">
+                게임 방법
+              </button>
             </div>
+
             <div class="hero-stats">
-              <div><strong id="home-best">—</strong><span>내 최고 기록</span></div>
-              <div><strong id="home-leader">—</strong><span>전체 최고 점수</span></div>
+              <div>
+                <strong id="home-best">—</strong>
+                <span>내 최고 기록</span>
+              </div>
+              <div>
+                <strong id="home-leader">—</strong>
+                <span>전체 최고 점수</span>
+              </div>
             </div>
           </div>
+
           <div class="tower-art" aria-label="쌓인 블록 일러스트">
             <div class="art-glow"></div>
             <div class="art-label">STACK<br><b>IT UP.</b></div>
@@ -42,83 +61,369 @@
             <div class="art-base"></div>
           </div>
         </div>
+
         <section class="home-lower">
           <button class="feature-card" data-view="ranking-view">
-            <span class="feature-icon">↗</span><span><b>LEADERBOARD</b><small>전교생 TOP 10 기록 확인</small></span><span class="card-arrow">→</span>
+            <span class="feature-icon">↗</span>
+            <span>
+              <b>LEADERBOARD</b>
+              <small>전교생 TOP 10 기록 확인</small>
+            </span>
+            <span class="card-arrow">→</span>
           </button>
+
           <button class="feature-card" data-view="tutorial-view">
-            <span class="feature-icon">?</span><span><b>HOW TO PLAY</b><small>게임 규칙과 조작 방법</small></span><span class="card-arrow">→</span>
+            <span class="feature-icon">?</span>
+            <span>
+              <b>HOW TO PLAY</b>
+              <small>게임 규칙과 조작 방법</small>
+            </span>
+            <span class="card-arrow">→</span>
           </button>
         </section>
-        <p class="connection-note" id="connection-status">랭킹 서버 연결 상태를 확인하고 있어요.</p>
+
+        <p class="connection-note" id="connection-status">
+          랭킹 서버 연결 상태를 확인하고 있어요.
+        </p>
       </section>
 
+      <!-- 게임 화면 -->
       <section id="game-view" class="view">
         <div class="section-heading">
-          <div><p class="eyebrow">ARCADE / 001</p><h2>STACK <span>TOWER</span></h2></div>
-          <button class="button button-ghost button-small" data-view="home-view">← 홈으로</button>
+          <div>
+            <p class="eyebrow">ARCADE / 001</p>
+            <h2>STACK <span>TOWER</span></h2>
+          </div>
+          <button
+            class="button button-ghost button-small"
+            data-view="home-view"
+          >
+            ← 홈으로
+          </button>
         </div>
+
         <div class="game-layout">
           <div class="game-panel">
             <div class="game-hud">
-              <div><small>FLOOR</small><strong id="floor-count">0</strong></div>
-              <div><small>BEST</small><strong id="game-best">0</strong></div>
-              <div><small>PERFECT</small><strong id="perfect-count">0</strong></div>
+              <div>
+                <small>FLOOR</small>
+                <strong id="floor-count">0</strong>
+              </div>
+              <div>
+                <small>BEST</small>
+                <strong id="game-best">0</strong>
+              </div>
+              <div>
+                <small>PERFECT</small>
+                <strong id="perfect-count">0</strong>
+              </div>
             </div>
+
             <div class="canvas-wrap">
-              <canvas id="game-canvas" width="900" height="620" aria-label="타워 쌓기 게임"></canvas>
+              <canvas
+                id="game-canvas"
+                width="900"
+                height="620"
+                aria-label="타워 쌓기 게임"
+              ></canvas>
+
               <div id="game-overlay" class="game-overlay">
                 <div class="overlay-card">
                   <span class="overlay-kicker">READY?</span>
                   <h3>첫 블록을<br>쌓아 보세요.</h3>
                   <p>클릭 또는 스페이스바를 눌러 시작!</p>
-                  <button class="button button-primary" id="overlay-start">PLAY NOW</button>
+                  <button
+                    class="button button-primary"
+                    id="overlay-start"
+                  >
+                    PLAY NOW
+                  </button>
                 </div>
               </div>
             </div>
-            <div class="game-controls"><span><kbd>SPACE</kbd> 또는 <kbd>CLICK</kbd> 블록 놓기</span><span>정확하게 맞출수록 유리해요.</span></div>
+
+            <div class="game-controls">
+              <span>
+                <kbd>SPACE</kbd> 또는 <kbd>CLICK</kbd> 블록 놓기
+              </span>
+              <span>정확하게 맞출수록 유리해요.</span>
+            </div>
           </div>
+
           <aside class="side-panel">
-            <div class="side-card"><p class="eyebrow">YOUR RUN</p><strong class="side-score" id="live-score">0</strong><span>현재 점수</span></div>
-            <div class="side-card accent-card"><p class="eyebrow">CHALLENGE</p><h3>한 층 더,<br>한 점 더.</h3><p>블록을 최대한 정확하게 맞춰 최고 기록에 도전하세요.</p></div>
+            <div class="side-card">
+              <p class="eyebrow">YOUR RUN</p>
+              <strong class="side-score" id="live-score">0</strong>
+              <span>현재 점수</span>
+            </div>
+
+            <div class="side-card accent-card">
+              <p class="eyebrow">CHALLENGE</p>
+              <h3>한 층 더,<br>한 점 더.</h3>
+              <p>
+                블록을 최대한 정확하게 맞춰 최고 기록에 도전하세요.
+              </p>
+            </div>
           </aside>
         </div>
+
+        <!-- 게임 종료 및 기록 등록 -->
         <div id="result-panel" class="result-panel hidden">
-          <div><p class="eyebrow">GAME OVER</p><h3>타워 완성!</h3><p>이번 플레이 기록은 <strong id="final-score">0</strong>점입니다.</p></div>
-          <div class="result-submit">
-            <label for="nickname">랭킹에 표시할 닉네임</label>
-            <div class="submit-row"><input id="nickname" maxlength="12" placeholder="닉네임 (최대 12자)"><button class="button button-primary" id="submit-score">기록 등록</button></div>
-            <p id="submit-message" class="form-message">닉네임을 입력하고 기록을 등록하세요.</p>
+          <div>
+            <p class="eyebrow">GAME OVER</p>
+            <h3>타워 완성!</h3>
+            <p>
+              이번 플레이 기록은
+              <strong id="final-score">0</strong>점입니다.
+            </p>
           </div>
-          <div class="result-actions"><button class="button button-primary" id="retry-button">다시 하기 ↻</button><button class="button button-ghost" data-view="ranking-view">랭킹 보기</button></div>
+
+          <!-- 회원가입 / 로그인 -->
+          <div class="result-submit">
+            <p class="eyebrow">PLAYER ACCOUNT</p>
+            <h3>랭킹 참가하기</h3>
+
+            <p id="account-status" class="account-status">
+              닉네임을 등록하거나 로그인해 주세요.
+            </p>
+
+            <div id="account-form">
+              <div class="account-tabs">
+                <button
+                  type="button"
+                  class="account-tab active"
+                  id="login-tab"
+                >
+                  로그인
+                </button>
+
+                <button
+                  type="button"
+                  class="account-tab"
+                  id="register-tab"
+                >
+                  회원가입
+                </button>
+              </div>
+
+              <label for="nickname">닉네임</label>
+              <input
+                id="nickname"
+                type="text"
+                maxlength="12"
+                autocomplete="username"
+                placeholder="닉네임 (최대 12자)"
+              >
+
+              <label for="player-pin">PIN 번호</label>
+              <input
+                id="player-pin"
+                type="password"
+                inputmode="numeric"
+                pattern="[0-9]{6}"
+                maxlength="6"
+                autocomplete="off"
+                placeholder="숫자 6자리"
+              >
+
+              <button
+                type="button"
+                class="button button-primary account-button"
+                id="account-submit"
+              >
+                로그인
+              </button>
+            </div>
+
+            <!-- 로그인 성공 시 표시 -->
+            <div id="logged-in-panel" class="hidden">
+              <p>
+                로그인 계정:
+                <strong id="logged-in-nickname"></strong>
+              </p>
+
+              <button
+                type="button"
+                class="button button-ghost button-small"
+                id="logout-button"
+              >
+                로그아웃
+              </button>
+            </div>
+
+            <!-- 점수 등록 -->
+            <button
+              type="button"
+              class="button button-primary account-button"
+              id="submit-score"
+            >
+              현재 점수 등록하기
+            </button>
+
+            <p id="submit-message" class="form-message">
+              로그인 후 기록을 등록할 수 있습니다.
+            </p>
+          </div>
+
+          <div class="result-actions">
+            <button
+              class="button button-primary"
+              id="retry-button"
+            >
+              다시 하기 ↻
+            </button>
+
+            <button
+              class="button button-ghost"
+              data-view="ranking-view"
+            >
+              랭킹 보기
+            </button>
+          </div>
         </div>
       </section>
 
+      <!-- 랭킹 화면 -->
       <section id="ranking-view" class="view">
-        <div class="section-heading"><div><p class="eyebrow">GLOBAL LEADERBOARD</p><h2>HALL OF <span>FAME</span></h2></div><button class="button button-ghost button-small" data-view="home-view">← 홈으로</button></div>
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">GLOBAL LEADERBOARD</p>
+            <h2>HALL OF <span>FAME</span></h2>
+          </div>
+
+          <button
+            class="button button-ghost button-small"
+            data-view="home-view"
+          >
+            ← 홈으로
+          </button>
+        </div>
+
         <div class="ranking-card">
-          <div class="ranking-head"><div><h3>TOP 10</h3><p>모든 참가자가 공유하는 최고 기록</p></div><button id="refresh-ranking" class="button button-ghost button-small">↻ 새로고침</button></div>
-          <div id="ranking-list" class="ranking-list"><div class="empty-state">랭킹을 불러오는 중...</div></div>
-          <p class="ranking-footnote">동일 닉네임은 가장 높은 점수만 표시됩니다.</p>
+          <div class="ranking-head">
+            <div>
+              <h3>TOP 10</h3>
+              <p>모든 참가자가 공유하는 최고 기록</p>
+            </div>
+
+            <button
+              id="refresh-ranking"
+              class="button button-ghost button-small"
+            >
+              ↻ 새로고침
+            </button>
+          </div>
+
+          <div id="ranking-list" class="ranking-list">
+            <div class="empty-state">
+              랭킹을 불러오는 중...
+            </div>
+          </div>
+
+          <p class="ranking-footnote">
+            동일 닉네임은 가장 높은 점수만 표시됩니다.
+          </p>
         </div>
       </section>
 
+      <!-- 게임 방법 -->
       <section id="tutorial-view" class="view">
-        <div class="section-heading"><div><p class="eyebrow">QUICK GUIDE</p><h2>HOW TO <span>PLAY</span></h2></div><button class="button button-ghost button-small" data-view="home-view">← 홈으로</button></div>
-        <div class="tutorial-grid">
-          <article class="tutorial-card"><div class="step-number">01</div><div class="step-visual visual-move"><span class="mini-block"></span><span class="dotted-line"></span><span class="mini-block moving"></span></div><h3>블록의 움직임을 확인하세요.</h3><p>새 블록이 타워 위를 좌우로 이동합니다.</p></article>
-          <article class="tutorial-card"><div class="step-number">02</div><div class="step-visual visual-drop"><span class="mini-stack"></span><span class="drop-block"></span><span class="down-arrow">↓</span></div><h3>타이밍에 맞춰 놓으세요.</h3><p>마우스 클릭 또는 스페이스바로 블록을 떨어뜨립니다.</p></article>
-          <article class="tutorial-card"><div class="step-number">03</div><div class="step-visual visual-align"><span class="align-block"></span><span class="align-block aligned"></span><span class="check">✓</span></div><h3>최대한 정확하게 맞추세요.</h3><p>겹치지 않는 부분은 잘려 나가고, 남은 부분으로 계속 쌓습니다.</p></article>
-          <article class="tutorial-card"><div class="step-number">04</div><div class="step-visual visual-score"><strong>+1</strong><span>+1</span><b>TOP 10</b></div><h3>최고 기록에 도전하세요.</h3><p>쌓은 층수만큼 점수를 얻고, 타워를 놓치면 게임이 끝납니다.</p></article>
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">QUICK GUIDE</p>
+            <h2>HOW TO <span>PLAY</span></h2>
+          </div>
+
+          <button
+            class="button button-ghost button-small"
+            data-view="home-view"
+          >
+            ← 홈으로
+          </button>
         </div>
-        <div class="tutorial-bottom"><p><b>조작 방법</b><span><kbd>SPACE</kbd> 또는 마우스 클릭</span></p><button class="button button-primary" id="tutorial-start">규칙 확인 완료 — 게임 시작 ↗</button></div>
+
+        <div class="tutorial-grid">
+          <article class="tutorial-card">
+            <div class="step-number">01</div>
+            <div class="step-visual visual-move">
+              <span class="mini-block"></span>
+              <span class="dotted-line"></span>
+              <span class="mini-block moving"></span>
+            </div>
+            <h3>블록의 움직임을 확인하세요.</h3>
+            <p>새 블록이 타워 위를 좌우로 이동합니다.</p>
+          </article>
+
+          <article class="tutorial-card">
+            <div class="step-number">02</div>
+            <div class="step-visual visual-drop">
+              <span class="mini-stack"></span>
+              <span class="drop-block"></span>
+              <span class="down-arrow">↓</span>
+            </div>
+            <h3>타이밍에 맞춰 놓으세요.</h3>
+            <p>마우스 클릭 또는 스페이스바로 블록을 떨어뜨립니다.</p>
+          </article>
+
+          <article class="tutorial-card">
+            <div class="step-number">03</div>
+            <div class="step-visual visual-align">
+              <span class="align-block"></span>
+              <span class="align-block aligned"></span>
+              <span class="check">✓</span>
+            </div>
+            <h3>최대한 정확하게 맞추세요.</h3>
+            <p>
+              겹치지 않는 부분은 잘려 나가고,
+              남은 부분으로 계속 쌓습니다.
+            </p>
+          </article>
+
+          <article class="tutorial-card">
+            <div class="step-number">04</div>
+            <div class="step-visual visual-score">
+              <strong>+1</strong>
+              <span>+1</span>
+              <b>TOP 10</b>
+            </div>
+            <h3>최고 기록에 도전하세요.</h3>
+            <p>
+              쌓은 층수만큼 점수를 얻고,
+              타워를 놓치면 게임이 끝납니다.
+            </p>
+          </article>
+        </div>
+
+        <div class="tutorial-bottom">
+          <p>
+            <b>조작 방법</b>
+            <span>
+              <kbd>SPACE</kbd> 또는 마우스 클릭
+            </span>
+          </p>
+
+          <button
+            class="button button-primary"
+            id="tutorial-start"
+          >
+            규칙 확인 완료 — 게임 시작 ↗
+          </button>
+        </div>
       </section>
     </main>
-    <footer><span>STACK TOWER</span><span>BUILT FOR SCHOOL FESTIVAL</span></footer>
+
+    <footer>
+      <span>STACK TOWER</span>
+      <span>BUILT FOR SCHOOL FESTIVAL</span>
+    </footer>
   </div>
+
+  <!-- Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/config.js"></script>
   <script src="js/supabase.js"></script>
+
+  <!-- 게임 -->
   <script src="js/app.js"></script>
   <script src="js/game.js"></script>
 </body>
