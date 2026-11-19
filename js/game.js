@@ -2,10 +2,12 @@
   const canvas=document.getElementById("game-canvas"),ctx=canvas.getContext("2d");
   const overlay=document.getElementById("game-overlay"),result=document.getElementById("result-panel");
   const floorEl=document.getElementById("floor-count"),bestEl=document.getElementById("game-best"),perfectEl=document.getElementById("perfect-count"),liveEl=document.getElementById("live-score");
-  const W=900,H=620,baseY=560,blockH=23,initialW=220,speedBase=3.1;
+  const W=900,H=620,baseY=560,blockH=38,initialW=340,speedBase=3.1;
   let blocks=[],moving=null,score=0,perfect=0,best=Number(localStorage.getItem("stackTowerBest")||0),state="ready",raf=0,runToken="",finalScore=0,frame=0;
   bestEl.textContent=best;
   const armorColor="#242225";
+  const filmTexture=new Image();filmTexture.src="assets/film.webp";
+  filmTexture.addEventListener("load",()=>{if(state!=="playing")draw();});
   function reset(){
     cancelAnimationFrame(raf);blocks=[{x:(W-initialW)/2,y:baseY,w:initialW,color:armorColor}];
     moving=null;score=0;perfect=0;frame=0;finalScore=0;state="ready";runToken=crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random();
@@ -31,7 +33,7 @@
     score++;floorEl.textContent=score;liveEl.textContent=score;
     if(overlap<top.w*.22){gameOver();return;}
     moving=null;
-    if(blocks.length>17){blocks.forEach(b=>b.y+=blockH);blocks[0].y=baseY;}
+    if(blocks.length>11){blocks.forEach(b=>b.y+=blockH);blocks[0].y=baseY;}
     spawn();
   }
   function gameOver(){
@@ -50,7 +52,7 @@
      for(let y=0;y<H;y+=45){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
      ctx.strokeStyle="#8e242c66";ctx.beginPath();ctx.moveTo(W/2,0);ctx.lineTo(W/2,H);ctx.stroke();
      ctx.fillStyle="#ad2b35";ctx.fillRect(0,baseY+blockH,W,2);
-     const visible=blocks.slice(-18);
+     const visible=blocks.slice(-12);
      visible.forEach(b=>drawBlock(b.x,b.y,b.w,blockH,false));
      if(moving)drawBlock(moving.x,moving.y,moving.w,moving.h,true);
      ctx.fillStyle="#b9aeb0";ctx.font="13px monospace";ctx.textAlign="left";ctx.fillText("FAULT//01  /  CAM 01  /  FLOOR "+String(score).padStart(3,"0"),24,30);
@@ -68,48 +70,28 @@
    function drawBlock(x,y,w,h,isMoving){
      if(w<=0)return;
      ctx.save();
-     ctx.shadowColor=isMoving?'#ec2539':'#8e1724';ctx.shadowBlur=isMoving?18:7;
-     filmPath(x,y,w,h);ctx.fillStyle='#0b080a';ctx.fill();ctx.shadowBlur=0;
+     ctx.shadowColor=isMoving?'#f0253b':'#ae1b2c';ctx.shadowBlur=isMoving?24:10;
+     filmPath(x,y,w,h);ctx.fillStyle='#120d10';ctx.fill();ctx.shadowBlur=0;
      filmPath(x,y,w,h);ctx.clip();
-     const grad=ctx.createLinearGradient(x,y,x,y+h);
-     grad.addColorStop(0,'#2c2025');grad.addColorStop(.19,'#100d10');grad.addColorStop(.51,'#3c292d');grad.addColorStop(.83,'#10090d');grad.addColorStop(1,'#090609');
-     ctx.fillStyle=grad;ctx.fillRect(x,y,w,h);
-     // Old analog film frames, repeated rather than stretched.
-     ctx.strokeStyle='#9b7e8066';ctx.lineWidth=.7;
-     for(let i=0;i<w;i+=31){ctx.strokeRect(x+i+2,y+5,28,h-10);}
-     // Film perforations along both edges.
-     ctx.fillStyle='#040305';
-     for(let i=7;i<w-2;i+=11){ctx.fillRect(x+i,y+1,5,3);ctx.fillRect(x+i,y+h-4,5,3);}
-     ctx.fillStyle='#bd969655';
-     for(let i=7;i<w-2;i+=11){ctx.fillRect(x+i,y+1,5,.6);}
-     // A repeating ghostly surveillance shadow in each frame.
-     for(let i=0;i<w;i+=31){
-       const cx=x+i+17,cy=y+h*.51;
-       ctx.fillStyle='#a59c9c24';ctx.beginPath();ctx.ellipse(cx,cy-2,3,4,0,0,Math.PI*2);ctx.fill();
-       ctx.beginPath();ctx.ellipse(cx,cy+5,6,5,0,Math.PI,Math.PI*2);ctx.fill();
+     const bg=ctx.createLinearGradient(0,y,0,y+h);
+     bg.addColorStop(0,'#49343a');bg.addColorStop(.2,'#120e13');bg.addColorStop(.75,'#25141b');bg.addColorStop(1,'#090709');
+     ctx.fillStyle=bg;ctx.fillRect(x,y,w,h);
+     if(filmTexture.complete && filmTexture.naturalWidth){
+       // Repeat a detailed high-resolution film texture, clipped as the block narrows.
+       ctx.globalAlpha=.94;
+       const tile=210;
+       for(let dx=0;dx<w;dx+=tile){ctx.drawImage(filmTexture,x+dx,y,tile,h);}
+       ctx.globalAlpha=1;
+     } else {
+       ctx.fillStyle='#060506';for(let dx=6;dx<w-4;dx+=16){ctx.fillRect(x+dx,y+2,8,5);ctx.fillRect(x+dx,y+h-7,8,5);}
      }
-     // Fractured-glass scratches, repeatable across cropped block widths.
-     ctx.strokeStyle='#d4b4b477';ctx.lineWidth=.7;
-     for(let i=23;i<w;i+=66){
-       const sx=x+i,sy=y+Math.round(h*.47);
-       ctx.beginPath();ctx.moveTo(sx-13,y+2);ctx.lineTo(sx,sy);ctx.lineTo(sx+12,y+h-2);ctx.stroke();
-       ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(sx+14,y+3);ctx.moveTo(sx,sy);ctx.lineTo(sx-9,y+h-3);ctx.stroke();
-     }
-     // Dark crimson stains; no random flicker, so the texture stays stable.
-     ctx.fillStyle='#84162180';
-     for(let i=10;i<w;i+=53){
-       ctx.beginPath();ctx.ellipse(x+i,y+8,8,3.1,-.3,0,Math.PI*2);ctx.fill();
-       ctx.fillRect(x+i+2,y+9,1.8,Math.min(7,h-11));
-     }
-     // REC signal and light strip.
-     if(w>38){
-       ctx.fillStyle='#ed3545';ctx.shadowColor='#e51e35';ctx.shadowBlur=isMoving?12:5;
-       ctx.fillRect(x+w-25,y+h-7,17,2);ctx.shadowBlur=0;
-       ctx.beginPath();ctx.arc(x+12,y+h*.5,2,0,Math.PI*2);ctx.fill();
-     }
-     if(w>85){ctx.font='7px monospace';ctx.fillStyle='#e1aeb0';ctx.textAlign='left';ctx.fillText('REC 01',x+19,y+Math.min(14,h-7));}
+     // Red recording lamp and edge illumination, identical on every block.
+     ctx.fillStyle='#ff334a';ctx.shadowColor='#ed1731';ctx.shadowBlur=isMoving?19:10;
+     ctx.fillRect(x+Math.max(5,w-38),y+h-7,Math.min(28,Math.max(0,w-8)),3);
+     if(w>85){ctx.beginPath();ctx.arc(x+21,y+h*.52,3,0,Math.PI*2);ctx.fill();}
+     ctx.shadowBlur=0;
      ctx.restore();
-     ctx.save();filmPath(x,y,w,h);ctx.strokeStyle=isMoving?'#ed4756':'#806266';ctx.lineWidth=1.1;ctx.stroke();ctx.restore();
+     ctx.save();filmPath(x,y,w,h);ctx.strokeStyle=isMoving?'#f05061':'#9d6570';ctx.lineWidth=1.6;ctx.stroke();ctx.restore();
    }
   function loop(){
     if(state!=="playing")return;
