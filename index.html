@@ -1,0 +1,419 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#060608">
+  <title>FAULT//01 — Classified Precision Test</title>
+  <link rel="stylesheet" href="css/style.css?v=6">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">⌖</span> FAULT//01
+      </a>
+      <nav class="site-nav" aria-label="메뉴"><button type="button" data-view="home-view">GAME</button><button type="button" data-view="ranking-view">기록확인</button><button type="button" data-view="tutorial-view">GUIDE</button></nav><span class="topbar-tag">CONTAINMENT SYSTEM // v1.7.3</span>
+    </header>
+
+    <main>
+      <!-- 홈 화면 -->
+      <section id="home-view" class="view active">
+        <div class="horror-home">
+          <div class="scene-backdrop" aria-hidden="true"></div>
+          <div class="hidden-ghost" aria-hidden="true"></div>
+          <div class="scene-noise" aria-hidden="true"></div><div class="glass-crack" aria-hidden="true"></div><div class="horror-scene-label" aria-hidden="true">CAM 01 / REC <span>●</span></div>
+          <div class="home-utility"><span><b class="rec-dot"></b> CONTAINMENT NETWORK / CAM 01</span><span>EXPERIMENT LOG — 001 <em>● RESTRICTED</em></span></div>
+          <div class="home-stage">
+            <aside class="evidence-rail" aria-hidden="true">
+              <div class="cam-unit"><div class="cam-label">CAM 01 <span>● REC</span></div><div class="cam-screen cam-one"><span>SECTOR_07</span></div><div class="cam-time">NO SIGNAL LOSS // 00:01:37</div></div>
+              <div class="cam-unit cam-unit-small"><div class="cam-label">CAM 02 <span>● REC</span></div><div class="cam-screen cam-two"><span>OBSERVATION</span></div></div>
+              <div class="classified-stamp">CLASSIFIED <small>F / 001</small></div>
+            </aside>
+            <div class="home-center">
+              <p class="case-overline">[ EXPERIMENT LOG : 01 ] <span>/// PRECISION STACKING PROTOCOL</span></p>
+              <h1 class="fault-title">FAULT<span>//01</span></h1>
+              <p class="fault-subtitle">[ PRECISION STACKING PROTOCOL ]</p>
+              <p class="hero-description">타이밍을 맞춰 블록을 쌓고,<br>랭킹에 이름을 올려 보세요.</p>
+              <div class="hero-actions"><button class="button button-primary" id="start-button"><span>▶</span> INITIATE</button><button class="button button-ghost" data-view="tutorial-view">▤ &nbsp; PROTOCOL</button></div>
+              <div class="hero-stats"><div><span>PERSONAL BEST</span><strong id="home-best">—</strong></div><div><span>GLOBAL TOP</span><strong id="home-leader">—</strong></div></div>
+              <div class="home-warning"><span>01 / EXPERIMENT ACTIVE</span><span>DO NOT INTERRUPT</span></div>
+            </div>
+            <aside class="subject-rail" aria-hidden="true"><div class="subject-sheet"><div class="sheet-clip"></div><span>SUBJECT_01</span><div class="subject-photo"></div><small>ACCESS LEVEL / 01<br>STATUS: ACTIVE<br>FILE: F-001</small><div class="barcode"></div></div><div class="tank"><span class="tank-top">CONTAINMENT / 01</span><div class="tank-silhouette"></div><span class="tank-bottom">● SYSTEM ONLINE</span></div></aside>
+          </div>
+          <div class="scene-bottom"><span>▥ &nbsp; SECURE CHANNEL ESTABLISHED</span><span>FAULT PROTOCOL / VERSION 01.0</span></div>
+        </div>
+
+        <section class="home-lower">
+          <button class="feature-card" data-view="ranking-view">
+            <span class="feature-icon">▥</span>
+            <span>
+              <b>기록확인</b>
+              <small>기록확인</small>
+            </span>
+            <span class="card-arrow">→</span>
+          </button>
+
+          <button class="feature-card" data-view="tutorial-view">
+            <span class="feature-icon">?</span>
+            <span>
+              <b>PROTOCOL</b>
+              <small>게임 규칙과 조작 방법</small>
+            </span>
+            <span class="card-arrow">→</span>
+          </button>
+        </section>
+
+        <p class="connection-note" id="connection-status">
+          랭킹 서버 연결 상태를 확인하고 있어요.
+        </p>
+      </section>
+
+      <!-- 게임 화면 -->
+      <section id="game-view" class="view">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">CASE FILE / 001</p>
+            <h2>FAULT<span>//01</span></h2>
+          </div>
+          <button
+            class="button button-ghost button-small"
+            data-view="home-view"
+          >
+            ← 홈으로
+          </button>
+        </div>
+
+        <div class="game-layout">
+          <div class="game-panel">
+            <div class="surveillance-strip"><span><i></i> REC / LIVE FEED</span><span>CAM 01 — ALIGNMENT TEST</span></div>
+            <div class="game-hud">
+              <div>
+                <small>FLOOR</small>
+                <strong id="floor-count">0</strong>
+              </div>
+              <div>
+                <small>BEST</small>
+                <strong id="game-best">0</strong>
+              </div>
+              <div>
+                <small>PERFECT</small>
+                <strong id="perfect-count">0</strong>
+              </div>
+            </div>
+
+            <div class="canvas-wrap">
+              <canvas
+                id="game-canvas"
+                width="900"
+                height="620"
+                aria-label="타워 쌓기 게임"
+              ></canvas>
+
+              <div id="game-overlay" class="game-overlay">
+                <div class="overlay-card">
+                  <span class="overlay-kicker">SYSTEM READY / 01</span>
+                  <h3>첫 블록을<br>쌓아 보세요.</h3>
+                  <p>클릭 또는 스페이스바를 눌러 시작!</p>
+                  <button
+                    class="button button-primary"
+                    id="overlay-start"
+                  >
+                    INITIATE
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="game-controls">
+              <span>
+                <kbd>SPACE</kbd> 또는 <kbd>CLICK</kbd> 블록 놓기
+              </span>
+              <span>정확하게 맞출수록 유리해요.</span>
+            </div>
+          </div>
+
+          <aside class="side-panel">
+            <div class="side-card">
+              <p class="eyebrow">LIVE RECORD</p>
+              <strong class="side-score" id="live-score">0</strong>
+              <span>현재 점수</span>
+            </div>
+
+            <div class="side-card accent-card">
+              <p class="eyebrow">WARNING / PRECISION</p>
+              <h3>NO ROOM<br>FOR ERROR.</h3>
+              <p>
+                블록을 최대한 정확하게 맞춰 최고 기록에 도전하세요.
+              </p>
+            </div>
+          </aside>
+        </div>
+
+        <!-- 게임 종료 및 기록 등록 -->
+        <div id="result-panel" class="result-panel hidden">
+          <div>
+            <p class="eyebrow">CASE CLOSED</p>
+            <h3>기록 종료</h3>
+            <p>
+              이번 플레이 기록은
+              <strong id="final-score">0</strong>점입니다.
+            </p>
+          </div>
+
+          <!-- 회원가입 / 로그인 -->
+          <div class="result-submit">
+            <p class="eyebrow">SUBJECT IDENTIFICATION</p>
+            <h3>랭킹 참가하기</h3>
+
+            <p id="account-status" class="account-status">
+              이메일로 로그인하거나 새 계정을 만들어 주세요.
+            </p>
+
+            <div id="account-form">
+              <div class="account-tabs">
+                <button
+                  type="button"
+                  class="account-tab active"
+                  id="login-tab"
+                >
+                  로그인
+                </button>
+
+                <button
+                  type="button"
+                  class="account-tab"
+                  id="register-tab"
+                >
+                  회원가입
+                </button>
+              </div>
+
+              <label for="nickname" id="nickname-label">닉네임 (회원가입 시 사용)</label>
+              <input
+                id="nickname"
+                type="text"
+                maxlength="12"
+                autocomplete="username"
+                placeholder="닉네임 (최대 12자)"
+              >
+
+              <label for="player-email">이메일</label>
+              <input id="player-email" type="email" autocomplete="email" placeholder="이메일 주소">
+
+              <label for="player-pin">비밀번호 (8자 이상)</label>
+              <input
+                id="player-pin"
+                type="password"
+                minlength="8"
+                autocomplete="current-password"
+                placeholder="8자 이상 비밀번호"
+              >
+
+              <button
+                type="button"
+                class="button button-primary account-button"
+                id="account-submit"
+              >
+                로그인
+              </button>
+            </div>
+
+            <!-- 로그인 성공 시 표시 -->
+            <div id="logged-in-panel" class="hidden">
+              <p>
+                로그인 계정:
+                <strong id="logged-in-nickname"></strong>
+              </p>
+
+              <button
+                type="button"
+                class="button button-ghost button-small"
+                id="logout-button"
+              >
+                로그아웃
+              </button>
+            </div>
+
+            <!-- 점수 등록 -->
+            <button
+              type="button"
+              class="button button-primary account-button"
+              id="submit-score"
+            >
+              현재 점수 등록하기
+            </button>
+
+            <p id="submit-message" class="form-message">
+              로그인 후 기록을 등록할 수 있습니다.
+            </p>
+          </div>
+
+          <div class="result-actions">
+            <button
+              class="button button-primary"
+              id="retry-button"
+            >
+              다시 하기 ↻
+            </button>
+
+            <button
+              class="button button-ghost"
+              data-view="ranking-view"
+            >
+              랭킹 보기
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 랭킹 화면 -->
+      <section id="ranking-view" class="view">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">GLOBAL 기록확인</p>
+            <h2>SUBJECT <span>RECORDS</span></h2>
+          </div>
+
+          <button
+            class="button button-ghost button-small"
+            data-view="home-view"
+          >
+            ← 홈으로
+          </button>
+        </div>
+
+        <div class="ranking-card">
+          <div class="archive-mark">CONFIDENTIAL / RECORDS DEPARTMENT</div>
+          <div class="ranking-head">
+            <div>
+              <h3>TOP 10</h3>
+              <p>모든 참가자가 공유하는 최고 기록</p>
+            </div>
+
+            <button
+              id="refresh-ranking"
+              class="button button-ghost button-small"
+            >
+              ↻ 새로고침
+            </button>
+          </div>
+
+          <div id="ranking-list" class="ranking-list">
+            <div class="empty-state">
+              랭킹을 불러오는 중...
+            </div>
+          </div>
+
+          <p class="ranking-footnote">
+            동일 닉네임은 가장 높은 점수만 표시됩니다.
+          </p>
+        </div>
+      </section>
+
+      <!-- 게임 방법 -->
+      <section id="tutorial-view" class="view">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">OPERATING PROCEDURE / 01</p>
+            <h2>HOW TO <span>PLAY</span></h2>
+          </div>
+
+          <button
+            class="button button-ghost button-small"
+            data-view="home-view"
+          >
+            ← 홈으로
+          </button>
+        </div>
+
+        <div class="tutorial-grid">
+          <article class="tutorial-card">
+            <div class="step-number">01</div>
+            <div class="step-visual visual-move">
+              <span class="mini-block"></span>
+              <span class="dotted-line"></span>
+              <span class="mini-block moving"></span>
+            </div>
+            <h3>블록의 움직임을 확인하세요.</h3>
+            <p>새 블록이 타워 위를 좌우로 이동합니다.</p>
+          </article>
+
+          <article class="tutorial-card">
+            <div class="step-number">02</div>
+            <div class="step-visual visual-drop">
+              <span class="mini-stack"></span>
+              <span class="drop-block"></span>
+              <span class="down-arrow">↓</span>
+            </div>
+            <h3>타이밍에 맞춰 놓으세요.</h3>
+            <p>마우스 클릭 또는 스페이스바로 블록을 떨어뜨립니다.</p>
+          </article>
+
+          <article class="tutorial-card">
+            <div class="step-number">03</div>
+            <div class="step-visual visual-align">
+              <span class="align-block"></span>
+              <span class="align-block aligned"></span>
+              <span class="check">✓</span>
+            </div>
+            <h3>최대한 정확하게 맞추세요.</h3>
+            <p>
+              겹치지 않는 부분은 잘려 나가고,
+              남은 부분으로 계속 쌓습니다.
+            </p>
+          </article>
+
+          <article class="tutorial-card">
+            <div class="step-number">04</div>
+            <div class="step-visual visual-score">
+              <strong>+1</strong>
+              <span>+1</span>
+              <b>TOP 10</b>
+            </div>
+            <h3>최고 기록에 도전하세요.</h3>
+            <p>
+              쌓은 층수만큼 점수를 얻고,
+              타워를 놓치면 게임이 끝납니다.
+            </p>
+          </article>
+        </div>
+
+        <div class="tutorial-bottom">
+          <p>
+            <b>조작 방법</b>
+            <span>
+              <kbd>SPACE</kbd> 또는 마우스 클릭
+            </span>
+          </p>
+
+          <button
+            class="button button-primary"
+            id="tutorial-start"
+          >
+            규칙 확인 완료 — 게임 시작 ↗
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>FAULT//01 — CLASSIFIED</span>
+      <span>PROTOCOL 01 / SCHOOL FESTIVAL</span>
+    </footer>
+  </div>
+
+  <!-- 공포 연출 전용 레이어: 점수/로그인 화면은 그대로 유지 -->
+  <div id="scare-screen" class="scare-screen" aria-hidden="true"><img src="assets/ghost-play-a.webp" alt="" draggable="false"></div>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase.js?v=12"></script>
+
+  <!-- 게임 -->
+  <script src="js/app.js?v=12"></script>
+  <script src="js/game.js?v=9"></script>
+</body>
+</html>
