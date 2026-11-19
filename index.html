@@ -4,17 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0b1020">
-  <title>STACK TOWER — Build Your Tower</title>
+  <meta name="theme-color" content="#09090b">
+  <title>FAULT//01 — Classified Precision Test</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <div class="site-shell">
     <header class="topbar">
       <a class="brand" href="index.html">
-        <span class="brand-mark">S</span> STACK TOWER
+        <span class="brand-mark">F</span> FAULT//01
       </a>
-      <span class="topbar-tag">ARCADE CHALLENGE</span>
+      <span class="topbar-tag">RESTRICTED // SYSTEM 01</span>
     </header>
 
     <main>
@@ -22,15 +22,16 @@
       <section id="home-view" class="view active">
         <div class="hero">
           <div class="hero-copy">
-            <p class="eyebrow">ONE CLICK. ONE MORE BLOCK.</p>
-            <h1>HOW HIGH<br>CAN YOU <span>GO?</span></h1>
+            <div class="file-stamp">FILE ID : F-001 <span>● ACTIVE</span></div>
+            <p class="eyebrow">CLASSIFIED / PRECISION PROTOCOL</p>
+            <h1>EVERY MOVE<br>LEAVES A <span>TRACE.</span></h1>
             <p class="hero-description">
-              타이밍을 맞춰 블록을 쌓고, 전교생 랭킹에 이름을 올려 보세요.
+              기록은 남는다. 오차는 허용되지 않는다. 블록을 정확히 맞추고 최고 기록을 갱신하세요.
             </p>
 
             <div class="hero-actions">
               <button class="button button-primary" id="start-button">
-                게임 시작 <span>↗</span>
+                INITIATE <span>↗</span>
               </button>
               <button class="button button-ghost" data-view="tutorial-view">
                 게임 방법
@@ -49,9 +50,11 @@
             </div>
           </div>
 
-          <div class="tower-art" aria-label="쌓인 블록 일러스트">
+          <div class="tower-art" aria-label="금속 장갑판 블록 일러스트">
+            <span class="art-corner corner-tl"></span><span class="art-corner corner-tr"></span><span class="art-corner corner-bl"></span><span class="art-corner corner-br"></span>
+            <span class="art-index">FIG. 01 / MODULE ALIGNMENT</span>
             <div class="art-glow"></div>
-            <div class="art-label">STACK<br><b>IT UP.</b></div>
+            <div class="art-label">CASE<br><b>NO. 01</b></div>
             <div class="art-block block-1"></div>
             <div class="art-block block-2"></div>
             <div class="art-block block-3"></div>
@@ -66,7 +69,7 @@
           <button class="feature-card" data-view="ranking-view">
             <span class="feature-icon">↗</span>
             <span>
-              <b>LEADERBOARD</b>
+              <b>SUBJECT RECORDS</b>
               <small>전교생 TOP 10 기록 확인</small>
             </span>
             <span class="card-arrow">→</span>
@@ -75,7 +78,7 @@
           <button class="feature-card" data-view="tutorial-view">
             <span class="feature-icon">?</span>
             <span>
-              <b>HOW TO PLAY</b>
+              <b>PROTOCOL</b>
               <small>게임 규칙과 조작 방법</small>
             </span>
             <span class="card-arrow">→</span>
@@ -91,8 +94,8 @@
       <section id="game-view" class="view">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">ARCADE / 001</p>
-            <h2>STACK <span>TOWER</span></h2>
+            <p class="eyebrow">CASE FILE / 001</p>
+            <h2>FAULT<span>//01</span></h2>
           </div>
           <button
             class="button button-ghost button-small"
@@ -104,6 +107,7 @@
 
         <div class="game-layout">
           <div class="game-panel">
+            <div class="surveillance-strip"><span><i></i> REC / LIVE FEED</span><span>CAM 01 — ALIGNMENT TEST</span></div>
             <div class="game-hud">
               <div>
                 <small>FLOOR</small>
@@ -129,14 +133,14 @@
 
               <div id="game-overlay" class="game-overlay">
                 <div class="overlay-card">
-                  <span class="overlay-kicker">READY?</span>
+                  <span class="overlay-kicker">SYSTEM READY / 01</span>
                   <h3>첫 블록을<br>쌓아 보세요.</h3>
                   <p>클릭 또는 스페이스바를 눌러 시작!</p>
                   <button
                     class="button button-primary"
                     id="overlay-start"
                   >
-                    PLAY NOW
+                    INITIATE
                   </button>
                 </div>
               </div>
@@ -152,14 +156,14 @@
 
           <aside class="side-panel">
             <div class="side-card">
-              <p class="eyebrow">YOUR RUN</p>
+              <p class="eyebrow">LIVE RECORD</p>
               <strong class="side-score" id="live-score">0</strong>
               <span>현재 점수</span>
             </div>
 
             <div class="side-card accent-card">
-              <p class="eyebrow">CHALLENGE</p>
-              <h3>한 층 더,<br>한 점 더.</h3>
+              <p class="eyebrow">WARNING / PRECISION</p>
+              <h3>NO ROOM<br>FOR ERROR.</h3>
               <p>
                 블록을 최대한 정확하게 맞춰 최고 기록에 도전하세요.
               </p>
@@ -170,8 +174,8 @@
         <!-- 게임 종료 및 기록 등록 -->
         <div id="result-panel" class="result-panel hidden">
           <div>
-            <p class="eyebrow">GAME OVER</p>
-            <h3>타워 완성!</h3>
+            <p class="eyebrow">CASE CLOSED</p>
+            <h3>기록 종료</h3>
             <p>
               이번 플레이 기록은
               <strong id="final-score">0</strong>점입니다.
@@ -180,7 +184,7 @@
 
           <!-- 회원가입 / 로그인 -->
           <div class="result-submit">
-            <p class="eyebrow">PLAYER ACCOUNT</p>
+            <p class="eyebrow">SUBJECT IDENTIFICATION</p>
             <h3>랭킹 참가하기</h3>
 
             <p id="account-status" class="account-status">
@@ -287,8 +291,8 @@
       <section id="ranking-view" class="view">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">GLOBAL LEADERBOARD</p>
-            <h2>HALL OF <span>FAME</span></h2>
+            <p class="eyebrow">GLOBAL SUBJECT RECORDS</p>
+            <h2>SUBJECT <span>RECORDS</span></h2>
           </div>
 
           <button
@@ -300,6 +304,7 @@
         </div>
 
         <div class="ranking-card">
+          <div class="archive-mark">CONFIDENTIAL / RECORDS DEPARTMENT</div>
           <div class="ranking-head">
             <div>
               <h3>TOP 10</h3>
@@ -330,7 +335,7 @@
       <section id="tutorial-view" class="view">
         <div class="section-heading">
           <div>
-            <p class="eyebrow">QUICK GUIDE</p>
+            <p class="eyebrow">OPERATING PROCEDURE / 01</p>
             <h2>HOW TO <span>PLAY</span></h2>
           </div>
 
@@ -413,8 +418,8 @@
     </main>
 
     <footer>
-      <span>STACK TOWER</span>
-      <span>BUILT FOR SCHOOL FESTIVAL</span>
+      <span>FAULT//01 — CLASSIFIED</span>
+      <span>PROTOCOL 01 / SCHOOL FESTIVAL</span>
     </footer>
   </div>
 
