@@ -2,11 +2,11 @@
   const canvas=document.getElementById("game-canvas"),ctx=canvas.getContext("2d");
   const overlay=document.getElementById("game-overlay"),result=document.getElementById("result-panel");
   const floorEl=document.getElementById("floor-count"),bestEl=document.getElementById("game-best"),perfectEl=document.getElementById("perfect-count"),liveEl=document.getElementById("live-score");
-  const W=900,H=620,baseY=560,blockH=38,initialW=340,speedBase=3.1;
+  const W=900,H=620,baseY=548,blockH=43,initialW=370,speedBase=3.1;
   let blocks=[],moving=null,score=0,perfect=0,best=Number(localStorage.getItem("stackTowerBest")||0),state="ready",raf=0,runToken="",finalScore=0,frame=0;
   bestEl.textContent=best;
   const armorColor="#242225";
-  const filmTexture=new Image();filmTexture.src="assets/film.webp";
+  const filmTexture=new Image();filmTexture.src="assets/film-horror.webp";
   filmTexture.addEventListener("load",()=>{if(state!=="playing")draw();});
   function reset(){
     cancelAnimationFrame(raf);blocks=[{x:(W-initialW)/2,y:baseY,w:initialW,color:armorColor}];
@@ -33,7 +33,7 @@
     score++;floorEl.textContent=score;liveEl.textContent=score;
     if(overlap<top.w*.22){gameOver();return;}
     moving=null;
-    if(blocks.length>11){blocks.forEach(b=>b.y+=blockH);blocks[0].y=baseY;}
+    if(blocks.length>10){blocks.forEach(b=>b.y+=blockH);blocks[0].y=baseY;}
     spawn();
   }
   function gameOver(){
@@ -52,6 +52,7 @@
      for(let y=0;y<H;y+=45){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
      ctx.strokeStyle="#8e242c66";ctx.beginPath();ctx.moveTo(W/2,0);ctx.lineTo(W/2,H);ctx.stroke();
      ctx.fillStyle="#ad2b35";ctx.fillRect(0,baseY+blockH,W,2);
+     ctx.fillStyle="#a51a2b1c";ctx.fillRect(0,0,70,H);ctx.fillRect(W-70,0,70,H);
      const visible=blocks.slice(-12);
      visible.forEach(b=>drawBlock(b.x,b.y,b.w,blockH,false));
      if(moving)drawBlock(moving.x,moving.y,moving.w,moving.h,true);
@@ -79,7 +80,7 @@
      if(filmTexture.complete && filmTexture.naturalWidth){
        // Repeat a detailed high-resolution film texture, clipped as the block narrows.
        ctx.globalAlpha=.94;
-       const tile=210;
+       const tile=350;
        for(let dx=0;dx<w;dx+=tile){ctx.drawImage(filmTexture,x+dx,y,tile,h);}
        ctx.globalAlpha=1;
      } else {
