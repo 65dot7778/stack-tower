@@ -1,6 +1,6 @@
 window.STACK_TOWER_CONFIG = {
-  SUPABASE_URL: "여기에_프로젝트_URL",
-  SUPABASE_ANON_KEY: "여기에_공개용_키"
+  SUPABASE_URL: "https://mxhyvhgmjbdrdpoziikf.supabase.co/rest/v1/",
+  SUPABASE_ANON_KEY: "sb_publishable_NXvIIwof-hDkDyRv1KtBDw_poptAkfs"
 };
 (() => {
   const cfg = window.STACK_TOWER_CONFIG || {};
